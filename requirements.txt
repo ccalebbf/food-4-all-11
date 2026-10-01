@@ -1,0 +1,4 @@
+gspread==6.2.1
+persistent==6.8
+transaction==5.1
+ZODB==6.3
