@@ -14,7 +14,7 @@ def get_gspread_client():
     return gspread.service_account(filename = 'food_for_all.json')
 
 # Helper to retrieve Distribution Data
-@st.cache_data(ttl=300, show_spinner = False)
+@st.cache_data(show_spinner = False)
 def fetch_distribution_records():
     gc = get_gspread_client()
     spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
@@ -22,7 +22,7 @@ def fetch_distribution_records():
     return distributions_records.get_all_records(numericise_ignore=['all'])
 
 # Helper to retrieve deleted Distribution IDs (Failsafe for site reboots)
-@st.cache_data(ttl=300, show_spinner = False)
+@st.cache_data(show_spinner = False)
 def fetch_deletion_records():
     gc = get_gspread_client()
     spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
