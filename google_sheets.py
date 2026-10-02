@@ -3,6 +3,7 @@ import streamlit as st
 import gspread
 from gspread.utils import rowcol_to_a1
 
+# Establish Connection with the Google Sheets
 def get_gspread_client():
     if "gcp_service_account" in st.secrets:
         try:
