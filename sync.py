@@ -30,7 +30,7 @@ def data_to_db(connection, neighbourhood, blocks):
         transaction.commit()
         connection.sync()
 
-    n = db.root.get('neighbourhood')
+    n = db_root.get('neighbourhood')
 
     try:
         all_rows = fetch_distribution_records()
