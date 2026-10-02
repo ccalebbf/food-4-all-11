@@ -22,24 +22,42 @@ def data_to_db(connection, neighbourhood, blocks):
     db_root = connection.root()
     connection.sync()
 
-    #if 'neighbourhood' not in db_root or db_root.get(neighbourhood) is None:
+    if 'neighbourhood' not in db_root or db_root.get(neighbourhood) is None:
         # Make dictionary class
+        pg = Neighbourhood(neighbourhood, PersistentList(Block(key, blocks[key]) for key in blocks))
+        db_root['neighbourhood'] = pg
 
+        transaction.commit()
+        connection.sync()
 
-    #n = db.root.get('neighbourhood')
+    n = db.root.get('neighbourhood')
 
-    # Fetch deleted distributions first, sync them (as a failsafe)
-    # open google sheet
-    # for row in google sheet
-        # for block in n.blocks
-            # if row['block'] != None
-            #block.deleted_distributions.append(row['block'])
+    try:
+        all_rows = fetch_distribution_records()
+    except Exception as e:
+        return
 
+    for row in all_rows:
 
-    # Sync distributions, append those that have not been deleted
-    # for row in google sheet
-        # blocks_covered = []
+        blocks_covered = [int(x.strip()) for x in row["Blocks Covered"].split(",")]
 
-        # for block in n.blocks
-            #if block in blocks_covered
-                #copy logic from old file
+        dist_id = datetime.strptime(row["Timestamp"], "%m/%d/%Y %H:%M:%S").strftime("%y%m%d%H%M%S")
+
+        for block in n.blocks:
+
+            fetch_deletion_records(block, block.deleted_distributions)
+
+            if block.block in blocks_covered:
+
+                existing_ids = PersistentList(d for d in block.distributions)
+
+                if dist_id not in block.deleted_distributions and dist_id not in existing_ids:
+                    new_dist = Distribution(row["Name of organisation"], 
+                                            row["Date of distribution"], 
+                                            row["Type of Food distributed"], 
+                                            row["Number of people catered to (estimate)"], 
+                                            row["Were the food distributed halal certified?"])
+                    block.log_distribution(dist_id, new_dist)
+
+    transaction.commit()
+    connection.sync()
