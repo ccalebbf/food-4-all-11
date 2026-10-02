@@ -38,6 +38,10 @@ def data_to_db(connection, neighbourhood, blocks):
     except Exception as e:
         return
 
+    for block in n.blocks:
+        
+        fetch_deletion_records(block, block.deleted_distributions)
+
     for row in all_rows:
 
         blocks_covered = [int(x.strip()) for x in row["Blocks Covered"].split(",")]
@@ -45,8 +49,6 @@ def data_to_db(connection, neighbourhood, blocks):
         dist_id = datetime.strptime(row["Timestamp"], "%m/%d/%Y %H:%M:%S").strftime("%y%m%d%H%M%S")
 
         for block in n.blocks:
-
-            fetch_deletion_records(block, block.deleted_distributions)
 
             if block.block in blocks_covered:
 
