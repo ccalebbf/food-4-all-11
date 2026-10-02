@@ -1,6 +1,7 @@
 # -- File that deals with all things related to collecting Google Sheet data -- 
-import gspread
 import streamlit as st
+import gspread
+from gspread.utils import rowcol_to_a1
 
 def get_gspread_client():
     if "gcp_service_account" in st.secrets:
@@ -28,3 +29,39 @@ def fetch_deletion_records():
     spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
     deletion_records = spreadsheet.worksheet("DeletedIDs") 
     return deletion_records.get_all_records(numericise_ignore=['all'])
+
+# Helper to add deleted Distribution IDs to Google Sheet (Failsafe for site reboots)
+    # block - block in which distribution is deleted
+    # dist-id - id of deleted distribution
+def add_deletion_records(block, dist_id):
+    gc = get_gspread_client()
+    spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
+    deletion_records = spreadsheet.worksheet("DeletedIDs") 
+
+    deletion_values = deletion_records.get_all_values()
+
+    header_row = deletion_values[0]
+
+    try:
+        index_with_block_0 = header_row.index(str(block))
+
+        first_empty_row = None
+
+        for row_index_0 in range(1, len(deletion_values)):
+
+            row = deletion_values[row_index_0]
+
+            if index_with_block_0 >= len(row) and row[index_w_block_0].strip():
+                first_empty_row = row_index_0 + 1 # Converting row to 1-based index
+                break
+        
+        if first_empty_row is None:
+            first_empty_row = len(deletion_values) + 1
+
+        #Converts 0-based indices to 1-based indices for gspread
+        index_w_block_1 = index_w_block_0 + 1
+        cell_address = rowcol_to_a1(first_empty_row, index_w_block_1)
+
+        deletion_records.update_acell(cell_address, dist_id)
+    except ValueError as e:
+        print("Error: {e}")
