@@ -25,7 +25,7 @@ def data_to_db(connection, neighbourhood, blocks):
         # Make dictionary class
 
 
-    n = db.root.get('neighbourhood')
+    #n = db.root.get('neighbourhood')
 
     # Fetch deleted distributions first, sync them (as a failsafe)
     # open google sheet
