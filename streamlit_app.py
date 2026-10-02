@@ -24,7 +24,7 @@ st.set_page_config(page_title="Food Distribution Database", layout="wide")
 # -- Define Pages --
 home_page = st.Page("pages/home.py", title = "Home", icon = '🏠', default = True)
 pg_page = st.Page("pages/pearl_garden.py", title = "Pearl Garden Neighbourhood Records", icon = '🏘️')
-indi_page = st.Page("pages/individual_records.py", title = "Individual Block Records", icon = "🏡")
+indi_page = st.Page("pages/block_records.py", title = "Individual Block Records", icon = "🏡")
 
 ## -- Page Navigator --
 nav = st.navigation([home_page, pg_page, indi_page])
