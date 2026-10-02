@@ -26,4 +26,4 @@ def fetch_deletion_records():
     gc = get_gspread_client()
     spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
     deletion_records = spreadsheet.worksheet("DeletedIDs") 
-    return ddeletion.get_all_records(numericise_ignore=['all'])
+    return deletion_records.get_all_records(numericise_ignore=['all'])
