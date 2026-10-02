@@ -17,8 +17,7 @@ def get_gspread_client():
 
 # Helper to retrieve Distribution Data
 @st.cache_data(ttl=300, show_spinner = False)
-def fetch_distribution_records():
-    gc = get_gspread_client()
+def fetch_distribution_records(gc):
     spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
     distributions_records = spreadsheet.worksheet("Form Responses 2") 
     return distributions_records.get_all_records(numericise_ignore=['all'])
@@ -26,8 +25,7 @@ def fetch_distribution_records():
 # Helper to retrieve deleted Distribution IDs (Failsafe for site reboots)
     # block - block to obtain deleted records for
     # del_dists - each block's unique PersistentList of deleted IDs
-def fetch_deletion_records(block, del_dists):
-    gc = get_gspread_client()
+def fetch_deletion_records(gc, block, del_dists):
     spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
     deletion_records = spreadsheet.worksheet("DeletedIDs") 
 

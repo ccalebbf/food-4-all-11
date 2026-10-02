@@ -12,13 +12,14 @@ from persistent.list import PersistentList
 #Module Imports
 from db import get_db, load_db_data
 from models import Distribution, Block, Neighbourhood
-from google_sheets import fetch_distribution_records, fetch_deletion_records
+from google_sheets import get_gspread_client, fetch_distribution_records, fetch_deletion_records
 
 # Arguments: neighbourhood - name of neighbourhood, blocks - dictionary mapping block numbers to postal codes
 def data_to_db(connection, neighbourhood, blocks):
     if connection is None:
         return
 
+    gc = get_gspread_client()
     db_root = connection.root()
     connection.sync()
 
@@ -34,13 +35,13 @@ def data_to_db(connection, neighbourhood, blocks):
     n = db_root.get('neighbourhood')
 
     try:
-        all_rows = fetch_distribution_records()
+        all_rows = fetch_distribution_records(gc)
     except Exception as e:
         return
 
     for block in n.blocks:
-        
-        fetch_deletion_records(block, block.deleted_distributions)
+
+        fetch_deletion_records(gc, block, block.deleted_distributions)
 
     for row in all_rows:
 
