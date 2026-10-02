@@ -13,10 +13,10 @@ st.set_page_config(page_title="Food Distribution Database", layout="wide")
 connection, db, neighbourhood = load_db_data()
 
 if connection:
-    #try:
-    data_to_db(connection, 'Pearl Garden', pearl_garden)
-    #except Exception as e:
-        #st.error(f"Sync failed on startup: {e}")
+    try:
+        data_to_db(connection, 'Pearl Garden', pearl_garden)
+    except Exception as e:
+        st.error(f"Sync failed on startup: {e}")
 
     connection.sync()
     neighbourhood = connection.root().get('neighbourhood', None)
