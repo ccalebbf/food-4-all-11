@@ -10,16 +10,16 @@ pearl_garden = {98: 460098, 99: 460099,
 
 st.set_page_config(page_title="Food Distribution Database", layout="wide")
 
-#connection, db, neighbourhood = load_db_data()
+connection, db, neighbourhood = load_db_data()
 
-# if connection:
-#     try:
-#         data_to_db(connection, 'Pearl Garden', pearl_garden)
-#     except Exception as e:
-#         st.error(f"Sync failed on startup: {e}")
+if connection:
+     try:
+         data_to_db(connection, 'Pearl Garden', pearl_garden)
+     except Exception as e:
+         st.error(f"Sync failed on startup: {e}")
 
-#     connection.sync()
-#     neighbourhood = connection.root().get('neighbourhood', None)
+     connection.sync()
+     neighbourhood = connection.root().get('neighbourhood', None)
 
 # -- Define Pages --
 home_page = st.Page("pages/home.py", title = "Home", icon = '🏠', default = True)
