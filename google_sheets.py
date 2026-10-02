@@ -1,7 +1,5 @@
-# -- File that deals with all things related to data syncing -- 
-
+# -- File that deals with all things related to collecting Google Sheet data -- 
 import gspread
-import streamlit as st
 
 def get_gspread_client():
     if "gcp_service_account" in st.secrets:
