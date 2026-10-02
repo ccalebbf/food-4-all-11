@@ -1,6 +1,6 @@
 import streamlit as st
 from db import load_db_data
-#from sync import data_to_db
+from sync import data_to_db
 
 pearl_garden = {98: 460098, 99: 460099, 
                 100: 460100, 101: 460101, 
