@@ -1,7 +1,5 @@
 import streamlit as st
+from google_sheets import fetch_distribution_records and fetch_deletion_records
 
-#st.title("🎈 My new app")
-#st.write(
-    #"Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-#)
-
+deletion_records = fetch_deletion_records()
+st.text(deletion_records)
