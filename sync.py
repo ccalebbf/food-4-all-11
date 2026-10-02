@@ -27,6 +27,18 @@ def data_to_db(connection, neighbourhood, blocks):
 
     n = db.root.get('neighbourhood')
 
-    # Fetch deleted distributions first, sync them
+    # Fetch deleted distributions first, sync them (as a failsafe)
+    # open google sheet
+    # for row in google sheet
+        # for block in n.blocks
+            # if row['block'] != None
+            #block.deleted_distributions.append(row['block'])
+
 
     # Sync distributions, append those that have not been deleted
+    # for row in google sheet
+        # blocks_covered = []
+
+        # for block in n.blocks
+            #if block in blocks_covered
+                #copy logic from old file
