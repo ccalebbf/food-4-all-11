@@ -31,7 +31,7 @@ def fetch_deletion_records(block, del_dists):
     spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
     deletion_records = spreadsheet.worksheet("DeletedIDs") 
 
-    header_cell = deletion_records.find(str(block_no), in_row = 1)
+    header_cell = deletion_records.find(str(block), in_row = 1)
 
     if header_cell:
         
