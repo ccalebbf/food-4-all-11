@@ -18,8 +18,8 @@ if connection:
     #except Exception as e:
         #st.error(f"Sync failed on startup: {e}")
 
-     connection.sync()
-     neighbourhood = connection.root().get('neighbourhood', None)
+    connection.sync()
+    neighbourhood = connection.root().get('neighbourhood', None)
 
 # -- Define Pages --
 home_page = st.Page("pages/home.py", title = "Home", icon = '🏠', default = True)
