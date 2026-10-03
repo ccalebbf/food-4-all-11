@@ -26,7 +26,7 @@ with st.expander("🔍 Live API & DB Diagnostics", expanded=True):
         try:
             db, connection = get_db()
             try:
-                conection.sync()
+                connection.sync()
                 root = connection.root()
                 n = root.get('neighbourhood')
                 if n and n.blocks:
