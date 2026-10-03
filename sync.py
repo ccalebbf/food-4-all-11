@@ -70,3 +70,5 @@ def data_to_db(connection, neighbourhood, blocks):
     transaction.commit()
     #connection.transaction_manager.commit()
     connection.sync()
+
+    st.cache_data.clear()
