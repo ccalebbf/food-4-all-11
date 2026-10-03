@@ -21,7 +21,6 @@ with st.expander("🔍 Live API & DB Diagnostics", expanded=True):
         except Exception as e:
             st.error(f"Gspread Error: {e}")
 
-<<<<<<< HEAD
     with col2:
         st.markdown("**2. Raw ZODB Memory State**")
         try:
