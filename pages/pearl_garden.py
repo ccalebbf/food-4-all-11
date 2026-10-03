@@ -9,6 +9,7 @@ connection, db, neighbourhood = load_db_data()
 
 if connection:
     try:
+        data_to_db(connection)
         connection.sync()
         neighbourhood = connection.root().get('neighbourhood', None)
     except Exception as e:

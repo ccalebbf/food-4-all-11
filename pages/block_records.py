@@ -3,12 +3,14 @@
 import streamlit as st
 import transaction
 from db import load_db_data
+from sync import data_to_db
 from google_sheets import get_gspread_client, fetch_distribution_records, fetch_deletion_records
 
 connection, db, neighbourhood = load_db_data()
 
 if connection:
     try:
+        data_to_db(connection)
         connection.sync()
         neighbourhood = connection.root().get('neighbourhood', None)
     except Exception as e:
