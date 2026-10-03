@@ -4,7 +4,7 @@ import transaction
 from ZODB import DB
 from ZODB.FileStorage import FileStorage
 
-#@st.cache_resource
+@st.cache_resource
 def get_db():
     try:
         storage = FileStorage('Data.fs')
