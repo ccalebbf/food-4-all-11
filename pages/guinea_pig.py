@@ -1,4 +1,4 @@
-from google_sheets import get_gspread_client
+from google_sheets import get_gspread_client, fetch_distribution_records
      
 gc = get_gspread_client
 
