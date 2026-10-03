@@ -1,7 +1,6 @@
 import streamlit as st
 from db import load_db_data
 from sync import data_to_db
-from streamlit_autorefresh import st_autorefresh
 
 count = st_autorefresh(interval=30000, key="datarefresh")
 
