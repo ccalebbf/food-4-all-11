@@ -2,8 +2,8 @@ from google_sheets import get_gspread_client
      
 gc = get_gspread_client
 
-try:
-    all_rows = fetch_distribution_records(gc)
+
+all_rows = fetch_distribution_records(gc)
 
 for row in all_rows:
 
