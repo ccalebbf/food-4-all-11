@@ -4,8 +4,6 @@ gc = get_gspread_client
 
 try:
     all_rows = fetch_distribution_records(gc)
-except Exception as e:
-    return
 
 for row in all_rows:
 
