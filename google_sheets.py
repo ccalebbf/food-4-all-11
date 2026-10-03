@@ -17,8 +17,8 @@ def get_gspread_client():
 
 # Helper to retrieve Distribution Data
 @st.cache_data(ttl=300, show_spinner = False)
-def fetch_distribution_records(gc):
-    spreadsheet = gc.open("Food Distribution Logging Form (Responses)")
+def fetch_distribution_records(_gc):
+    spreadsheet = _gc.open("Food Distribution Logging Form (Responses)")
     distributions_records = spreadsheet.worksheet("Form Responses 2") 
     return distributions_records.get_all_records(numericise_ignore=['all'])
 
