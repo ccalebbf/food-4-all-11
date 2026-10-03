@@ -1,14 +1,8 @@
 import streamlit as st
 import transaction
 from db import load_db_data, get_db
-from sync import data_to_db
 from google_sheets import get_gspread_client, fetch_distribution_records, fetch_deletion_records
 
-pearl_garden = {98: 460098, 99: 460099, 
-                100: 460100, 101: 460101, 
-                102: 460102, 103: 460103, 
-                104: 460104, 105: 460105, 
-                106: 460106}
 
 with st.expander("🔍 Live API & DB Diagnostics", expanded=True):
     col1, col2 = st.columns(2)
@@ -46,5 +40,5 @@ with st.expander("🔍 Live API & DB Diagnostics", expanded=True):
             
     if st.button("🚨 Force Trigger Sync"):
         # Run sync and rerun immediately
-        data_to_db(connection, 'Pearl Garden', pearl_garden)
+        data_to_db()
         st.rerun()
