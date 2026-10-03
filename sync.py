@@ -35,11 +35,11 @@ def data_to_db(connection, neighbourhood, blocks):
 
     n = db_root.get('neighbourhood')
 
-    for block in n.blocks:
+    #for block in n.blocks:
 
-        fetch_deletion_records(gc, block, block.deleted_distributions)
+        #fetch_deletion_records(gc, block, block.deleted_distributions)
 
-        time.sleep(1)
+        #time.sleep(1)
 
     try:
         all_rows = fetch_distribution_records(gc)
