@@ -16,6 +16,7 @@ from models import Distribution, Block, Neighbourhood
 from google_sheets import get_gspread_client, fetch_distribution_records, fetch_deletion_records
 
 # Arguments: neighbourhood - name of neighbourhood, blocks - dictionary mapping block numbers to postal codes
+@st.fragment(run_every = 10)
 def data_to_db(connection, neighbourhood, blocks):
     if connection is None:
         return
