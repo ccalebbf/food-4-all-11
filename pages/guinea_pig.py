@@ -20,4 +20,5 @@ if neighbourhood is None or not hasattr(neighbourhood, 'blocks'):
     st.stop()
 
 for block in neighbourhood.blocks:
-    st.write(block)
+    for id, distribution in neighbourhood.distributions:
+        st.write(id, distribution)
