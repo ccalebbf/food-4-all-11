@@ -46,3 +46,8 @@ for tab, block in zip(tabs, neighbourhood.blocks):
             }
 
             st.table(block_data, border="horizontal")
+
+if st.sidebar.button("🔄 Fetch Fresh Data"):
+    st.cache_data.clear()
+    st.sidebar.success("Cache cleared!")
+    st.rerun()
