@@ -1,13 +1,23 @@
-from google_sheets import get_gspread_client, fetch_distribution_records
 import streamlit as st
-     
-gc = get_gspread_client
+import transaction
+from db import load_db_data
+from google_sheets import get_gspread_client, fetch_distribution_records, fetch_deletion_records
 
+connection, db, neighbourhood = load_db_data()
 
-all_rows = fetch_distribution_records(gc)
+if connection:
+    try:
+        connection.sync()
+        neighbourhood = connection.root().get('neighbourhood', None)
+    except Exception as e:
+        st.warning(f"DB sync error: {e}")
 
-for row in all_rows:
+if neighbourhood is None or not hasattr(neighbourhood, 'blocks'):
+    st.warning("Synchronizing database connection...")
+    if connection:
+        connection.sync()
+    st.rerun()
+    st.stop()
 
-    blocks_covered = [int(x.strip()) for x in row["Blocks Covered"].split(",")]
-
-    st.write(blocks_covered)
+for block in neighbourhood.blocks:
+    st.write(block)
