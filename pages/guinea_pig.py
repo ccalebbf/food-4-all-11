@@ -25,14 +25,16 @@ with st.expander("🔍 Live API & DB Diagnostics", expanded=True):
         st.markdown("**2. Raw ZODB Memory State**")
         try:
             db, connection = get_db()
-            with connection as conn:
-                conn.sync()
-                root = conn.root()
+            try:
+                conection.sync()
+                root = connection.root()
                 n = root.get('neighbourhood')
                 if n and n.blocks:
                     block_0 = n.blocks[0]
                     st.write(f"Block `{block_0.block}` Total Distributions: `{len(block_0.distributions)}`")
                     st.write("Keys in ZODB:", list(block_0.distributions.keys())[-5:])
+            finally:
+                connection.close()  # 🚨 Safely close connection
         except Exception as e:
             st.error(f"ZODB Read Error: {e}")
             
