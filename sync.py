@@ -4,7 +4,7 @@
 import gspread
 import streamlit as st
 import transaction
-from datetime import datetime, date
+from datetime import datetime, date, time
 from ZODB import DB
 from ZODB.FileStorage import FileStorage
 from persistent.list import PersistentList
@@ -37,6 +37,8 @@ def data_to_db(connection, neighbourhood, blocks):
     for block in n.blocks:
 
         fetch_deletion_records(gc, block, block.deleted_distributions)
+
+        time.sleep(1)
 
     try:
         all_rows = fetch_distribution_records(gc)
