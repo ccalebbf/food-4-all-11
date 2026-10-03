@@ -1,6 +1,9 @@
 import streamlit as st
 from db import load_db_data
 from sync import data_to_db
+from streamlit_autorefresh import st_autorefresh
+
+count = st_autorefresh(interval=30000, key="datarefresh")
 
 pearl_garden = {98: 460098, 99: 460099, 
                 100: 460100, 101: 460101, 
