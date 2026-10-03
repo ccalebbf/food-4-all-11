@@ -38,3 +38,8 @@ if neighbourhood:
         st.subheader("Number of Past Distributions 📖")
 
         st.text(f"{pd}")
+
+if st.sidebar.button("🔄 Fetch Fresh Data"):
+    st.cache_data.clear()
+    st.sidebar.success("Cache cleared!")
+    st.rerun()
