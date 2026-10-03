@@ -22,4 +22,4 @@ if neighbourhood is None or not hasattr(neighbourhood, 'blocks'):
 for block in neighbourhood.blocks:
     for distribution in block.distributions:
         st.write(distribution)
-        st.write(distributions[distribution])
+        st.write(block.distributions[distribution])
