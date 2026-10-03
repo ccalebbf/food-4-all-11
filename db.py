@@ -18,11 +18,9 @@ def get_db():
 def load_db_data():
     db, connection = get_db()
     if connection is None:
-        return None, None, None
-    
-    connection.sync()
-    
+        return None, None, None 
     try:
+        connection.sync()
         db_root = connection.root()
         neighbourhood = db_root.get('neighbourhood', None)
         return connection, db, neighbourhood
