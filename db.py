@@ -15,6 +15,7 @@ def get_db():
         st.error(f"Failed to access Data.fs: {e}")
         return None, None
 
+@st.cache_data(ttl=60)
 def load_db_data():
     db, connection = get_db()
     if connection is None:
