@@ -58,7 +58,8 @@ def data_to_db(connection, neighbourhood, blocks):
 
                 existing_ids = PersistentList(d for d in block.distributions)
 
-                if dist_id not in block.deleted_distributions and dist_id not in existing_ids:
+                if dist_id not in block.deleted_distributions 
+                #and dist_id not in existing_ids:
                     new_dist = Distribution(row["Name of organisation"], 
                                             row["Date of distribution"], 
                                             row["Type of Food distributed"], 
