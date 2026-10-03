@@ -17,8 +17,6 @@ if neighbourhood:
     st.title(f"Summary of {neighbourhood.name} Records")
     
     for block in neighbourhood.blocks:
-
-        st.write(block)
         
         if block.latest_distribution is None:
             ld = "No Record"
