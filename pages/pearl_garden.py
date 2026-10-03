@@ -2,6 +2,8 @@
 
 import streamlit as st
 from db import load_db_data
+from google_sheets import fetch_distribution_records, fetch_deletion_records
+from sync import data_to_db
 
 connection, db, neighbourhood = load_db_data()
 
@@ -40,6 +42,9 @@ if neighbourhood:
         st.text(f"{pd}")
 
 if st.sidebar.button("🔄 Fetch Fresh Data"):
-    st.cache_data.clear()
+   
+    fetch_distribution_records.clear()
+    data_to_db(connection)
+
     st.sidebar.success("Cache cleared!")
     st.rerun()
