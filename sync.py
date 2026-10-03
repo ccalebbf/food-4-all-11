@@ -29,8 +29,8 @@ def data_to_db(connection, neighbourhood, blocks):
         pg = Neighbourhood(neighbourhood, PersistentList(Block(key, blocks[key]) for key in blocks))
         db_root['neighbourhood'] = pg
 
-        #transaction.commit()
-        connection.transaction_manager.commit()
+        transaction.commit()
+        #connection.transaction_manager.commit()
         connection.sync()
 
     n = db_root.get('neighbourhood')
@@ -66,6 +66,6 @@ def data_to_db(connection, neighbourhood, blocks):
                                             row["Were the food distributed halal certified?"])
                     block.log_distribution(dist_id, new_dist)
 
-    #transaction.commit()
-    connection.transaction_manager.commit()
+    transaction.commit()
+    #connection.transaction_manager.commit()
     connection.sync()
